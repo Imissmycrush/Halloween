@@ -1,11 +1,9 @@
-/* Global settings */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-/* Background */
 .background {
     background: url('https://i.imgur.com/tHOC9EG.png') no-repeat center center fixed;
     background-size: cover;
@@ -15,7 +13,6 @@ body, html {
     justify-content: center;
 }
 
-/* Glassmorphism container */
 .glass {
     width: 300px;
     background: rgba(255, 255, 255, 0.1);
@@ -29,7 +26,6 @@ body, html {
     gap: 24px;
 }
 
-/* Form styling */
 .form {
     width: 100%;
     display: flex;
@@ -37,20 +33,18 @@ body, html {
     gap: 48px;
 }
 
-/* Header */
 h1 {
     font-family: 'Creepster', cursive;
     color: white;
 }
 
-/* Terms text styling */
 .terms {
     color: white;
-    line-height: 20px;
-    letter-spacing: 0.6px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  
 }
 
-/* Input fields */
 .input-field {
     border: none;
     border-bottom: 2px solid white;
@@ -58,16 +52,15 @@ h1 {
     outline: none;
     color: #fff;
     padding-bottom: 12px;
-    font-family: 'Creepster', cursive;
 }
 
 .input-field::placeholder {
     color: white;
-    opacity: 1;
-    font-family: 'Creepster', cursive;
+    opacity: 1; /* Optional, to ensure full color visibility */
+      font-family: 'Creepster', cursive;
 }
 
-/* Button styling */
+
 button {
     width: 100%;
     padding: 10px;
@@ -76,29 +69,27 @@ button {
     cursor: pointer;
     background-color: #D3510B; /* Halloween orange */
     color: #000;
-    font-weight: 700;
-    font-family: 'Creepster', cursive;
+  font-weight:700;
+      font-family: 'Creepster', cursive;
 }
-
-/* Creepy button with spider web effect */
-.creepy-button {
-    position: relative;
-    overflow: hidden;
+ .creepy-button {
+  position: relative;
+  overflow: hidden;
 }
 
 .web {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://i.imgur.com/YourSpiderWebImage.png'); /* Replace with your spider web image URL */
-    background-size: cover;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none; /* Prevents interference with button clicks */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(''); /* Replace with your spider web image */
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none; /* So it doesn't interfere with button click */
 }
 
 .creepy-button:hover .web {
-    opacity: 0.7;
+  opacity: 0.7;
 }
