@@ -25,9 +25,12 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
+            // Kiểm tra thông tin đăng nhập
             if (username === "Halloween" && password === "31102024") {
-                window.location.href = "./halloween/signin.html"
+                // Điều hướng tới trang signin.html nếu thông tin đúng
+                window.location.href = "./halloween/signin.html";
             } else {
+                // Hiển thị thông báo nếu thông tin sai
                 alert("Tên đăng nhập hoặc mật khẩu không đúng.");
             }
         }
