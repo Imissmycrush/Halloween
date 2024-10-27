@@ -13,7 +13,9 @@
             <form class="form" onsubmit="return validateLogin(event)">
                 <input type="text" id="username" placeholder="Tên đăng nhập" class="input-field">
                 <input type="password" id="password" placeholder="Mật khẩu" class="input-field">
-                <button type="submit">Đăng nhập</button>
+                <button type="submit" class="creepy-button">
+                    <div class="web"></div>Đăng nhập
+                </button>
             </form>
         </div>
     </div>
@@ -26,7 +28,7 @@
             const password = document.getElementById("password").value;
 
             // Kiểm tra thông tin đăng nhập
-            if (username === "Halloween" && password === "31102024") {
+            if (username === "halloween" && password === "31102024") {
                 // Điều hướng tới trang signin.html nếu thông tin đúng
                 window.location.href = "./signin.html";
             } else {
@@ -36,5 +38,4 @@
         }
     </script>
 </body>
-</html> thiết kế password và username với font font-family: 'Creepster',
-    color: white;
+</html>
