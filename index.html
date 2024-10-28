@@ -15,13 +15,23 @@
                 <input type="password" id="password" placeholder="Mật khẩu" class="input-field">
                 <button type="submit" class="creepy-button">
                     <div class="web"></div>Đăng nhập
+        <div class="spider" id="spider">🕷️</div>
                 </button>
             </form>
         </div>
     </div>
 
     <script>
-        function validateLogin(event) {
+
+        const spider = document.getElementById('spider');
+
+    document.addEventListener('mousemove', (e) => {
+      spider.style.left = `${e.pageX}px`;
+      spider.style.top = `${e.pageY}px`;
+    });
+        
+        function validateLogin(event)
+     {
             event.preventDefault();
 
             const username = document.getElementById("username").value;
