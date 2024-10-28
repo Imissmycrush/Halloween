@@ -92,16 +92,3 @@ button {
 .creepy-button:hover .web {
     opacity: 0.7;
 }
-
-/* Ẩn con trỏ chuột mặc định */
-    body {
-      cursor: none;
-    }
-
-    /* Định dạng biểu tượng con nhện */
-    .spider {
-      position: absolute;
-      font-size: 24px; /* Điều chỉnh kích thước tùy ý */
-      pointer-events: none;
-      transition: transform 0.05s ease; /* Di chuyển mượt */
-    }
