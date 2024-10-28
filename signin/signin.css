@@ -1,27 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Jolly+Lodger&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+:root {
     --header-height: 3.5rem;
-
     --first-color: hsl(25, 90%, 54%);
     --first-color-alt: hsl(25, 85%, 50%);
     --title-color: hsl(25, 48%, 12%);
     --text-color: hsl(25, 32%, 24%);
     --white-color: hsl(0, 0%, 100%);
-    --body-color: hsl(18, 58%, 82%);
-
+    --body-color: hsl(240, 100%, 20%); /* Màu tối với sắc tím */
     --body-font: "Montserrat", sans-serif;
     --second-font: "Jolly Lodger", system-ui;
     --biggest-font-size: 3.5rem;
     --normal-font-size: .938rem;
-
     --font-regular: 400;
     --font-semi-bold: 600;
-
     --z-tooltip: 10;
     --z-fixed: 100;
 }
+
 
 @media screen and (min-width: 1150px){
     :root{
