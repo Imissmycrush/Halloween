@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="background">
+        <div class="dark-overlay" id="overlay"></div> <!-- Lớp phủ bóng tối -->
+        
         <div class="glass">
             <h1>Đăng nhập</h1>
             <form class="form" onsubmit="return validateLogin(event)">
@@ -20,9 +22,16 @@
         </div>
     </div>
 
-    <script>        
-        function validateLogin(event)
-     {
+    <!-- JavaScript -->
+    <script>
+        // Di chuyển ánh sáng theo chuột
+        const overlay = document.getElementById('overlay');
+        document.addEventListener('mousemove', (e) => {
+            overlay.style.background = `radial-gradient(circle at ${e.pageX}px ${e.pageY}px, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.8) 150px)`;
+        });
+
+        // Xử lý đăng nhập
+        function validateLogin(event) {
             event.preventDefault();
 
             const username = document.getElementById("username").value;
@@ -30,10 +39,8 @@
 
             // Kiểm tra thông tin đăng nhập
             if (username === "halloween" && password === "31102024") {
-                // Điều hướng tới trang signin.html nếu thông tin đúng
                 window.location.href = "./signin/signin.html";
             } else {
-                // Hiển thị thông báo nếu thông tin sai
                 alert("Tên đăng nhập hoặc mật khẩu không đúng.");
             }
         }
