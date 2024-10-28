@@ -272,12 +272,13 @@ img{
 }
 
 .dark-overlay {
-    position: absolute;
+    position: fixed; /* Đặt thành fixed để nó luôn ở vị trí trên cùng */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.8) 150px);
-    pointer-events: none;
+    pointer-events: none; /* Để không làm ảnh hưởng đến các sự kiện chuột khác */
     transition: background 0.1s;
+    z-index: 1; /* Đảm bảo nó nằm trên cùng */
 }
