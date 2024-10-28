@@ -43,3 +43,7 @@ const shadowHeader = () => {
     this.scrollY >= 50 ? header.classList.add('shadow-header') : header.classList.remove('shadow-header');
 }
 window.addEventListener('scroll', shadowHeader);
+const overlay = document.getElementById('overlay');
+        document.addEventListener('mousemove', (e) => {
+            overlay.style.background = `radial-gradient(circle at ${e.pageX}px ${e.pageY}px, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.8) 150px)`;
+        });
