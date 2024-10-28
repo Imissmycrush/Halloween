@@ -1,3 +1,4 @@
+/* Body và các phần tử nền */
 body, html {
     margin: 0;
     padding: 0;
@@ -12,6 +13,18 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Hiệu ứng bóng tối và ánh sáng theo chuột */
+.dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.8) 150px);
+    pointer-events: none; /* Đảm bảo không chặn chuột */
+    transition: background 0.1s;
 }
 
 .glass {
@@ -86,7 +99,7 @@ button {
     background-size: cover;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    pointer-events: none; /* So it doesn't interfere with button click */
+    pointer-events: none;
 }
 
 .creepy-button:hover .web {
