@@ -8,7 +8,7 @@
     --title-color: hsl(25, 48%, 12%);
     --text-color: hsl(25, 32%, 24%);
     --white-color: hsl(0, 0%, 100%);
-    --body-color: hsl(240, 100%, 20%); /* Màu tối với sắc tím */
+    --body-color: hsl(0, 0%, 0%); /* Màu tối với sắc tím */
     --body-font: "Montserrat", sans-serif;
     --second-font: "Jolly Lodger", system-ui;
     --biggest-font-size: 3.5rem;
