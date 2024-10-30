@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Visual trên Ảnh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #controls {
+            z-index: 1;
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            display: flex;
+            gap: 10px; /* Space between icons */
+        }
+        #image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5; /* Điều chỉnh độ mờ của ảnh */
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .icon {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            padding: 8px; /* Space around the icons */
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+            font-size: 20px; /* Icon size */
+        }
+        .icon:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Change on hover */
+        }
+        input[type="file"] {
+            display: none; /* Hide the actual file input */
+        }
+        .file-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px; /* Adjust icon size */
+            height: 30px; /* Adjust icon size */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <label for="fileInput" class="file-icon icon">
+            <i class="fas fa-file-audio"></i> <!-- Icon for audio files -->
+        </label>
+        <input type="file" id="fileInput" accept="audio/*" />
+        <button class="icon" id="playButton" disabled>
+            <i class="fas fa-play"></i>
+        </button>
+        <button class="icon" id="pauseButton" disabled>
+            <i class="fas fa-pause"></i>
+        </button>
+    </div>
+    <audio id="audio" loop></audio>
+    <img id="image" src="https://i.pinimg.com/736x/f2/53/81/f2538148341dafece38c5a5b91ee6665.jpg" alt="Background Image" />
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const audio = document.getElementById('audio');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const fileInput = document.getElementById('fileInput');
+
+        // Set up Audio Context
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        // Load background image
+        const backgroundImage = new Image();
+        backgroundImage.src = 'https://i.pinimg.com/736x/f2/53/81/f2538148341dafece38c5a5b91ee6665.jpg'; // Background image
+        backgroundImage.onload = function() {
+            draw(); // Start drawing when the image is loaded
+        };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function draw() {
+            requestAnimationFrame(draw);
+            analyser.getByteFrequencyData(dataArray);
+
+            // Vẽ hình ảnh nền anime
+            ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+            // Clear canvas with a semi-transparent background for fading effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // thêm độ trong suốt để tạo hiệu ứng fade
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const barWidth = (canvas.width / bufferLength) * 1.5;
+            let barHeight;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i] * 2;
+
+                // Tạo gradient cho mỗi thanh
+                const gradient = ctx.createLinearGradient(0, canvas.height - barHeight / 2, 0, canvas.height);
+                gradient.addColorStop(0, `rgb(${barHeight + 100}, 50, 150)`);
+                gradient.addColorStop(1, `rgb(${barHeight + 50}, 100, 255)`);
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
+
+                x += barWidth + 1;
+            }
+        }
+
+        // Handle play button click event
+        playButton.addEventListener('click', function() {
+            audio.play(); // Play audio only when play button is clicked
+            audioContext.resume().then(() => {
+                playButton.disabled = true; // Disable the play button
+                pauseButton.disabled = false; // Enable the pause button
+            });
+        });
+
+        // Handle file input change event
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                audio.src = fileURL; // Set audio source to the selected file
+                playButton.disabled = false; // Enable the play button when a file is selected
+                pauseButton.disabled = true; // Disable the pause button until audio is playing
+            }
+        });
+
+        // Handle pause button click event
+        pauseButton.addEventListener('click', function() {
+            audio.pause(); // Pause audio
+            playButton.disabled = false; // Enable play button
+            pauseButton.disabled = true; // Disable pause button
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Call resizeCanvas once initially
+    </script>    
+</body>
+</html>
